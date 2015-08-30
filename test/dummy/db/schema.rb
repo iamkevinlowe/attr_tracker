@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828222123) do
+ActiveRecord::Schema.define(version: 20150830195702) do
 
   create_table "attr_tracker_changes", force: :cascade do |t|
     t.text     "before"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20150828222123) do
     t.string   "trackable_type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "attr_name"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text     "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
