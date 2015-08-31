@@ -1,4 +1,4 @@
 class Post < ActiveRecord::Base
-  include AttrTracker::Trackable
+  tracks :title, :body
   
 end
