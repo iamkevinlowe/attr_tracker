@@ -14,32 +14,25 @@ module AttrTracker
 
           # Creates instance method returning all changes of an attribute
           define_method "#{attribute}_changes" do
-            Change.where(
-              "trackable_id = ? AND
-              trackable_type = ? AND
-              attr_name = ?",
-              self.id,
-              self.class.to_s,
-              attribute
-            )
+            self.tracked_changes.where(attr_name: attribute)
+          end
+          # Change 1 -> 11/01/2014
+          # Change 2 -> 11/03/2014
+          # name_at(11/02/2014) -> 11/01/2014 version
+          define_method "#{attribute}_at" do |date|
+            self.tracked_changes.where(attr_name: attribute)
+                                .where("created_at <= ?", date)
+                                .order("created_at ASC").first
           end
 
           # Creates instance method returning changes of an attribute between two dates
           define_method "#{attribute}_between" do |start_date, end_date|
-            Change.where(
-              "trackable_id = ? AND
-              trackable_type = ? AND
-              attr_name = ? AND
-              created_at > ? AND < ?",
-              self.id,
-              self.class.to_s,
-              attribute,
-              start_date,
-              end_date
-            )
+            self.tracked_changes.where(attr_name: attribute)
+                                .where("created_at > ? AND < ?", start_date, end_date)
+
           end
         end
-
+        has_many :tracked_changes, class_name: "AttrTracker::Change", as: :trackable
         # Before save hook to create attribute changes
         before_save :save_changes
       end
