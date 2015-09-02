@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = AttrTracker::VERSION
   s.authors     = ["Kevin Lowe"]
   s.email       = ["iamkevinlowe@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of AttrTracker."
-  s.description = "TODO: Description of AttrTracker."
+  s.homepage    = "http://github.com/iamkevinlowe/attr_tracker"
+  s.summary     = "Track changes."
+  s.description = "Allows the changes to an attribute to be tracked."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
